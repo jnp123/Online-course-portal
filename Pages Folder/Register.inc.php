@@ -61,3 +61,44 @@ term {
 </body>
 </html>
 
+<?php
+	//Establishing Connection with Server
+	$connection = mysqli_connect("localhost", "user", "user123","project");
+
+	if(isset($_POST["submit"]))
+{
+   
+	//Fetching variables of the form which travels in URL
+    
+    $Email = $_POST["Email"];
+    $Firstname = $_POST["Firstname"];
+    $Lastame = $_POST["Lastame"];
+	$password = $_POST["Password"];
+    $ConfirmPassword = $_POST["ConfirmPassword"];
+    $Mobile = $_POST["Mobile"];
+    
+	
+	if($Email!=""&&$Mobile!="")
+	{		
+	
+	
+	//Insert Query of SQL
+   
+	
+	 $sql = "INSERT INTO register VALUES ('$Email', '$Firstname', '$Lastame', '$password', '$ConfirmPassword', '$Mobile')";
+   
+	
+	 if (mysqli_query($connection, $sql))
+	 {
+     echo "<br/><br/><span>Data Inserted successfully...!!</span>";;
+     } 
+	 else 
+	 {
+     echo "Error: " . $sql . "<br>" . mysqli_error($connection);
+     }
+	}
+ }
+
+	//Closing Connection with Server
+	mysqli_close($connection);
+?>
